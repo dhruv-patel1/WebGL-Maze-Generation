@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+        <title>Maze Generation</title>
+        <link rel="stylesheet" href="styles.css">
+        <link href='https://fonts.googleapis.com/css?family=Amatic SC' rel='stylesheet'>
+    </head>
+
+    <script id="vertex-shader" type="x-shader/x-vertex">
+        #version 300 es
+        in vec4 aPosition;
+        
+        void
+        main()
+        {
+            gl_Position = aPosition;
+        }
+    </script>
+        
+    <script id="fragment-shader" type="x-shader/x-fragment">
+        #version 300 es
+        precision mediump float;
+        
+        out vec4 fColor;
+        
+        void
+        main()
+        {
+            fColor = vec4( 0.0, 0.0, .0, 1.0 );
+        }
+    </script>
+        
+    <script type="text/javascript" src="./Common/initShaders.js"></script>
+    <script type="text/javascript" src="./Common/MVnew.js"></script>
+    <script type="text/javascript" src="maze.js"></script>
+
+    <body>
+        <script>
+            function func(){
+                initializeMaze();
+            }
+            function help(){
+                alert("Controls: up, down, right, and left arrow keys.")
+            }
+        </script>
+         <!--Add Interactive Features after like choosing maze dimensions and generating maze-->
+         <header class="header">
+             <p class="title">Interactive Maze Game</p>
+             
+         </header>
+
+         <div class="io-div">
+             <div class="io-header">
+                <p class="header-info">Enter Maze Dimensions:</p>
+                <div class="help-container" onclick="help()">
+                    <p>Help</p>
+                </div>
+             </div>
+            
+            <form>
+                <div>
+                    Number of Rows: 
+                    <br>
+                    <input type="text" id="n"/>
+                    <br>
+                </div>
+                <div>
+                    Number of Columns: 
+                    <br>
+                    <input type="text" id="m"/>
+                    <br>
+                </div>
+                <button type="button" onclick="func()">Generate Maze</button>
+            </form>
+            <div class="msg-container">
+                <p class="msg">Enter dimension values from 0 -> 100</p>
+            </div>
+        </div>
+
+        <p id="alert"></p>
+        <div>
+            <canvas id="gl-canvas" width="750" height="750">
+                Oops ... your browser doesn't support the HTML5 canvas element
+            </canvas>
+        </div>
+       
+    </body>
+
+</html>
